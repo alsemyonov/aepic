@@ -20,6 +20,8 @@ module Aepic
         end
         helper_method :resource_serializer
 
+        include Overrides
+
         api_schema << self
       end
 
@@ -34,26 +36,28 @@ module Aepic
         end
       end
 
-      protected
+      module Overrides
+        protected
 
-      # @return [ActiveModel::Serializer]
-      def resource_serializer
-        self.class.resource_serializer
-      end
+        # @return [ActiveModel::Serializer]
+        def resource_serializer
+          self.class.resource_serializer
+        end
 
-      # @return [Draper::Decorator]
-      def resource
-        get_resource_ivar || set_resource_ivar(super.decorate)
-      end
+        # @return [Draper::Decorator]
+        def resource
+          get_resource_ivar || set_resource_ivar(super.decorate)
+        end
 
-      # @return [Draper::Decorator]
-      def build_resource
-        get_resource_ivar || set_resource_ivar(super.decorate)
-      end
+        # @return [Draper::Decorator]
+        def build_resource
+          get_resource_ivar || set_resource_ivar(super.decorate)
+        end
 
-      # @return [Draper::CollectionDecorator]
-      def collection
-        get_collection_ivar || set_collection_ivar(super.decorate)
+        # @return [Draper::CollectionDecorator]
+        def collection
+          get_collection_ivar || set_collection_ivar(super.decorate)
+        end
       end
     end
   end

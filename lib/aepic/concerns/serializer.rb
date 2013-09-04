@@ -4,21 +4,27 @@ require 'aepic'
 module Aepic
   module Concerns
     module Serializer
-      attributes :id
+      extend ActiveSupport::Concern
 
-      XSD_TYPES = Hash.new { |hash, key| hash[key] = "xsd:#{key}"}.merge({
+      XSD_TYPES = Hash.new { |hash, key| hash[key] = "xsd:#{key}" }.merge({
       })
 
-      def self.jsonld_context
-        {}.tap do |context|
-          schema[:attributes].each do |name, type|
-            context[name] = XSD_TYPES[type]
-          end
-        end
+      included do
+        attributes :id
       end
 
-      def self.jsonld
-        {'@context' => jsonld_context.merge(xsd: 'http://www.w3.org/2001/XMLSchema#')}
+      module ClassMethods
+        def jsonld_context
+          {}.tap do |context|
+            schema[:attributes].each do |name, type|
+              context[name] = XSD_TYPES[type]
+            end
+          end
+        end
+
+        def jsonld
+          {'@context' => jsonld_context.merge(xsd: 'http://www.w3.org/2001/XMLSchema#')}
+        end
       end
 
       def attributes
