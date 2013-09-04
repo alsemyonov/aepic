@@ -1,5 +1,16 @@
-require "aepic/version"
+require 'aepic/version'
+require 'active_support'
 
 module Aepic
-  # Your code goes here...
+  extend ActiveSupport::Autoload
+
+  autoload :Controller
+  autoload :Schema
+
+  module Concerns
+    extend ActiveSupport::Autoload
+
+    autoload :Controller
+    autoload :Serializer
+  end
 end
