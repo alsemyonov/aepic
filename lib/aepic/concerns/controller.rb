@@ -2,6 +2,8 @@
 require 'aepic'
 require 'active_support/concern'
 require 'inherited_resources'
+require 'has_scope'
+require 'kaminari'
 
 module Aepic
   module Concerns
@@ -18,6 +20,9 @@ module Aepic
           ids = ids.to_s.split(',').map { |id| id.to_i }
           scope.where(id: ids)
         end
+
+        has_scope :page, only: :index
+        has_scope :per, only: :index
         helper_method :resource_serializer
 
         include Overrides
@@ -66,7 +71,12 @@ module Aepic
         # This simplifies processing, as you can know that a resource key
         # will always be a list.
         def _render_option_json(resource, options)
-          resource = Array.wrap(resource)
+          resource = Array.wrap(resource) unless resource.respond_to?(:length)
+
+          if resource.respond_to?(:total_count)
+            options[:meta] ||= {}
+            options[:meta][:total] = resource.total_count
+          end
 
           json = ActiveModel::Serializer.build_json(self, resource, options)
 
