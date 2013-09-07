@@ -58,6 +58,24 @@ module Aepic
         def collection
           get_collection_ivar || set_collection_ivar(super.decorate)
         end
+
+        # @see http://jsonapi.org/format/
+        # Singular resources are represented as JSON objects.
+        # However, they are still wrapped inside an array:
+        # {"posts": [{ ... }]}
+        # This simplifies processing, as you can know that a resource key
+        # will always be a list.
+        def _render_option_json(resource, options)
+          resource = Array.wrap(resource)
+
+          json = ActiveModel::Serializer.build_json(self, resource, options)
+
+          if json
+            super(json, options)
+          else
+            super
+          end
+        end
       end
     end
   end
