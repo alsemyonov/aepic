@@ -5,10 +5,16 @@ require 'aepic'
 module Aepic
   module Concerns
     module Decorator
-      include ActiveSupport::Concern
+      extend ActiveSupport::Concern
+
+      module ClassMethods
+        def jsonld_context
+          @json_context ||= h.polymorphic_url(object_class, format: :jsonld)
+        end
+      end
 
       def jsonld_context
-        h.polymorphic_url(object.class, format: :jsonld)
+        self.class.jsonld_context
       end
     end
   end
