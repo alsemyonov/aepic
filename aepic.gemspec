@@ -24,6 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'has_scope'
   spec.add_runtime_dependency 'responders'
   spec.add_runtime_dependency 'draper'
+  spec.add_runtime_dependency 'kaminari'
 
   spec.add_development_dependency 'bundler', '~> 1.3'
   spec.add_development_dependency 'rake'
