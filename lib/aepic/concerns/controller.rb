@@ -21,7 +21,7 @@ module Aepic
           scope.where(id: ids)
         end
 
-        has_scope :page, only: :index
+        has_scope :page, only: :index, default: '1'
         has_scope :per, only: :index
         helper_method :resource_serializer
 
