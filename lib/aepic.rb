@@ -15,6 +15,7 @@ module Aepic
 
     autoload :Controller
     autoload :Decorator
+    autoload :Responder
     autoload :Serializer
   end
 end

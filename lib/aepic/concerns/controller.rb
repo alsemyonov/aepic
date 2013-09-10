@@ -12,6 +12,7 @@ module Aepic
 
       included do
         inherit_resources
+        self.perform_caching = true
 
         respond_to :json
         respond_to :jsonld, only: :index
@@ -71,10 +72,16 @@ module Aepic
         # This simplifies processing, as you can know that a resource key
         # will always be a list.
         def _render_option_json(resource, options)
-          resource = Array.wrap(resource) unless resource.respond_to?(:length)
+          options[:meta] ||= {}
 
+          # Figure out right way to present ETags in payloads
+          #etags = combine_etags(resource)
+          #key = ActiveSupport::Cache.expand_cache_key(etags)
+          #etag = %("#{Digest::MD5.hexdigest(key)}")
+          #options[:meta][:etag] = etag
+
+          resource = Array.wrap(resource) unless resource.respond_to?(:length)
           if resource.respond_to?(:total_count)
-            options[:meta] ||= {}
             options[:meta][:total] = resource.total_count
           end
 

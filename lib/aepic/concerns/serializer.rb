@@ -17,19 +17,20 @@ module Aepic
       end
 
       module ClassMethods
-        #def inherited(child)
-        #  super
-        #  child.root = child.name.gsub(/Serializer$/, '').pluralize.camelcase(:lower)
-        #end
-
         def jsonld_context
           {}.tap do |context|
             schema[:attributes].each do |name, type|
               context[name] = XSD_TYPES[type]
             end
             schema[:associations].each do |name, type|
-              associated_class = "#{name.to_s.classify}Decorator".constantize
-              context[name] = associated_class.jsonld_context
+              class_name = name.to_s
+              if class_name =~ /_ids?\Z/
+                context[name] = 'xsd:integer'
+              else
+                class_name = name.to_s.classify
+                associated_class = "#{class_name}Decorator".constantize
+                context[name] = associated_class.jsonld_context
+              end
             end
           end
         end

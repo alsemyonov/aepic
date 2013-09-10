@@ -1,10 +1,14 @@
 %h1= page_title(resource_class: resource_class.model_name.human)
 
-%h2 JSON LD Context:
+%h2 JSON-LD Context:
+%p
+  Link:
+  %code= link_to(collection_url(format: :jsonld))
 %pre
-  %code= resource_serializer.jsonld
+  JSON:
+  %code= JSON.pretty_generate resource_serializer.jsonld
 
-%h2 Available endpoints:
+%h2 Resources:
 %ul
   - if controller.respond_to?(:index)
     %li
