@@ -8,32 +8,32 @@ module Aepic
 
       include Responders::HttpCacheResponder
 
-      def initialize(controller, resources, options={})
-        resources = resources.last if resources.last.is_a?(Array)
-        super(controller, resources, options)
-        @http_cache = options.delete(:http_cache)
-      end
-
       private
 
       def do_http_cache?
-        puts resources.inspect
-        puts resource.inspect
-        get?.tap { |gt| puts "get: #{gt}"  } && (@http_cache != false).tap { |gt| puts "http_cache: #{gt}"  }  &&
-          persisted?.tap { |gt| puts "persisted?: #{gt}"  }  && resourceful?.tap { |gt| puts "resourceful?: #{gt}"  } && resource.respond_to?(:updated_at).tap { |gt| puts "respond_to?: #{gt}"  }
+        get? && (@http_cache != false) && persisted? && resourceful? && resource_item.respond_to?(:updated_at)
       end
 
       # @return [Boolean]
       def do_http_cache!
-        puts resources, resource
-        last_modified = resource.updated_at
-        etag = resources
+        last_modified = resource_item.updated_at
+        etag = resource_collection
 
-        resources.each do |resource|
+        resource_collection.each do |resource|
           last_modified = resource.updated_at if resource.updated_at > last_modified
-        end if resources.length > 1
+        end if resource_collection.length > 1
 
-        !controller.stale?(etag: resources, last_modified: last_modified)
+        !controller.stale?(etag: etag, last_modified: last_modified)
+      end
+
+      # @return [Array] array of resources
+      def resource_collection
+        @resource_collection ||= resource.is_a?(Array) ? resource : resources
+      end
+
+      # @return [Object] just one resource
+      def resource_item
+        @resource_item ||= resource.is_a?(Array) ? resource.last : resource
       end
     end
   end

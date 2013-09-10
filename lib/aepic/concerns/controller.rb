@@ -74,11 +74,10 @@ module Aepic
         def _render_option_json(resource, options)
           options[:meta] ||= {}
 
-          # Figure out right way to present ETags in payloads
-          #etags = combine_etags(resource)
-          #key = ActiveSupport::Cache.expand_cache_key(etags)
-          #etag = %("#{Digest::MD5.hexdigest(key)}")
-          #options[:meta][:etag] = etag
+          etags = combine_etags(resource)
+          key = ActiveSupport::Cache.expand_cache_key(etags)
+          etag = %("#{Digest::MD5.hexdigest(key)}")
+          options[:meta][:etag] = etag
 
           resource = Array.wrap(resource) unless resource.respond_to?(:length)
           if resource.respond_to?(:total_count)

@@ -11,10 +11,7 @@ module Aepic
       end.merge({
       })
 
-      included do
-        attributes :id
-        embed :ids, include: true
-      end
+      included { attributes :id }
 
       module ClassMethods
         def jsonld_context
