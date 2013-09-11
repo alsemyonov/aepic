@@ -13,6 +13,7 @@ module Aepic
       included do
         inherit_resources
         self.perform_caching = true
+        self.responder = Aepic::Responder
 
         respond_to :json
         respond_to :jsonld, only: :index

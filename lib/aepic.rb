@@ -8,6 +8,7 @@ module Aepic
   autoload :Controller
   autoload :Engine
   autoload :Schema
+  autoload :Responder
   autoload :Serializer
 
   module Concerns
