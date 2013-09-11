@@ -24,8 +24,12 @@ TODO: Write usage instructions here
 ## Roadmap
 
 * TODO: Provide similar Atom-based XML representation
-* TODO: Provide [WADL][] for [API][]
-* TODO: Provide [RSDL][] for [API][]
+* TODO: Provide [WADL][]
+
+## Ideas
+
+* TODO: Provide [Swagger-compatible][Swagger] API description
+* TODO: Provide [RSDL][]
 
 ## Contributing
 
@@ -41,3 +45,4 @@ TODO: Write usage instructions here
 [API]: http://en.wikipedia.org/wiki/Application_programming_interface
 [WADL]: http://en.wikipedia.org/wiki/WADL
 [RSDL]: http://en.wikipedia.org/wiki/RSDL
+[Swagger]: https://developers.helloreverb.com/swagger/
