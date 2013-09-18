@@ -14,8 +14,6 @@ module Aepic
       require 'action_controller/metal/renderers'
       ActionController::Renderers.add(:jsonld) do |object, options|
         self.content_type = Mime[:jsonld]
-        Rails.logger.info object
-        puts object
         object.respond_to?(:jsonld) ? object.jsonld.to_json(options) : object
       end
     end

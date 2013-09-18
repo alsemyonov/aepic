@@ -38,6 +38,11 @@ module Aepic
           resource_class.active_model_serializer
         end
 
+        # @return [Draper::Decorator]
+        def resource_decorator
+          "#{resource_class.name}Decorator".safe_constantize
+        end
+
         def api_schema
           @api_schema ||= Schema.default
         end
@@ -52,18 +57,23 @@ module Aepic
         end
 
         # @return [Draper::Decorator]
+        def resource_decorator
+          self.class.resource_decorator
+        end
+
+        # @return [Draper::Decorator]
         def resource
-          get_resource_ivar || set_resource_ivar(super.decorate)
+          get_resource_ivar || set_resource_ivar(resource_decorator.decorate(super))
         end
 
         # @return [Draper::Decorator]
         def build_resource
-          get_resource_ivar || set_resource_ivar(super.decorate)
+          get_resource_ivar || set_resource_ivar(resource_decorator.decorate(super))
         end
 
         # @return [Draper::CollectionDecorator]
         def collection
-          get_collection_ivar || set_collection_ivar(super.decorate)
+          get_collection_ivar || set_collection_ivar(resource_decorator.decorate_collection(super))
         end
 
         # @see http://jsonapi.org/format/

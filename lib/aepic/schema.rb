@@ -17,11 +17,13 @@ module Aepic
     end
 
     def resources
-      controllers.each do |controller|
-        if controller.action_methods.include?('index')
-
+      @resources ||=
+        controllers.inject do |resources, controller|
+          if controller.action_methods.include?('index')
+            resources << Resource.new()
+          end
+          resources
         end
-      end
     end
 
     def controllers
