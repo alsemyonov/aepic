@@ -46,3 +46,7 @@ TODO: Write usage instructions here
 [WADL]: http://en.wikipedia.org/wiki/WADL
 [RSDL]: http://en.wikipedia.org/wiki/RSDL
 [Swagger]: https://developers.helloreverb.com/swagger/
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/alsemyonov/aepic/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
