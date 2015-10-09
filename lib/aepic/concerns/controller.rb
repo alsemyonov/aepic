@@ -30,6 +30,8 @@ module Aepic
         include Overrides
 
         api_schema << self
+
+        include ApiController
       end
 
       module ClassMethods

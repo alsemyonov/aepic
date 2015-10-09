@@ -1,0 +1,30 @@
+h1= page_title(resource_class: resource_class.model_name.human)
+
+h2 JSON-LD Context:
+p
+  | Link:
+  code= link_to(collection_url(format: :jsonld))
+pre
+  | JSON:
+  code= JSON.pretty_generate resource_serializer.jsonld
+
+h2 Resources:
+ul
+  - if controller.respond_to?(:index)
+    li
+      code GET # collection_path(format: :json) 
+  - if controller.respond_to?(:create)
+    li
+      code POST # collection_path(format: :json) 
+  - if controller.respond_to?(:show)
+    li
+      code GET # resource_path(':id', format: :json) 
+  - if controller.respond_to?(:update)
+    li
+      code PUT # resource_path(':id', format: :json) 
+  - if controller.respond_to?(:update)
+    li
+      code PATCH # resource_path(':id', format: :json) 
+  - if controller.respond_to?(:destroy)
+    li
+      code DELETE # resource_path(':id', format: :json) 

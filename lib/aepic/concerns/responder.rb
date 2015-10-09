@@ -11,7 +11,7 @@ module Aepic
       private
 
       def do_http_cache?
-        get? && (@http_cache != false) && persisted? && resourceful? && resource_item.respond_to?(:updated_at)
+        get? && (@http_cache != false) && persisted? && resource_item.respond_to?(:updated_at)
       end
 
       # @return [Boolean]
