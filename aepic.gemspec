@@ -18,8 +18,8 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = %w(lib)
 
-  spec.add_runtime_dependency 'actionpack', '~> 4.2.3'
-  spec.add_runtime_dependency 'active_model_serializers', '~> 0.9.3'
+  spec.add_runtime_dependency 'actionpack', '~> 4.2.5'
+  spec.add_runtime_dependency 'active_model_serializers', '~> 0.10.0.rc3'
   spec.add_runtime_dependency 'inherited_resources', '~> 1.6.0'
   spec.add_runtime_dependency 'has_scope', '~> 0.6.0'
   spec.add_runtime_dependency 'responders', '~> 2.1.0'
@@ -29,4 +29,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler', '~> 1.3'
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'apipie-rails'
 end

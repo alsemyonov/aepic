@@ -4,6 +4,6 @@ source 'https://rubygems.org'
 gemspec
 
 group :development, :test do
-  gem 'rspec', '~> 2.14.1'
-  gem 'simplecov', '~> 0.8.0'
+  gem 'rspec', '~> 3.4.0'
+  gem 'simplecov', '~> 0.11.0'
 end
