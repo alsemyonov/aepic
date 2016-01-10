@@ -1,4 +1,6 @@
 # Dependencies
+require 'action_controller'
+require 'action_view'
 require 'inherited_resources'
 require 'responders'
 require 'kaminari'
