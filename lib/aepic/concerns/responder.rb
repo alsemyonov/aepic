@@ -16,10 +16,13 @@ module Aepic
 
       # @return [Boolean]
       def do_http_cache!
-        last_modified = resource_item.updated_at
+        resource_item = resource_item.object if resource_item.is_a?(Draper::Decorator)
+
+        last_modified = resource_item.try(:updated_at) || Time.at(0)
         etag = resource_collection
 
         resource_collection.each do |resource|
+          resource = resource.object if resource.is_a?(Draper::Decorator)
           last_modified = resource.updated_at if resource.updated_at > last_modified
         end if resource_collection.length > 1
 

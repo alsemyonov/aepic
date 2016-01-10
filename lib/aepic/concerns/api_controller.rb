@@ -9,12 +9,11 @@ module Aepic
     module ApiController
       extend ActiveSupport::Concern
 
-      included do
-        has_api!
-      end
+      included { has_api! }
 
       module ClassMethods
         def has_api!
+          klass = resource_class
           human_name = resource_class.model_name.human
           param_group_id = "#{resource_class.model_name.singular}_id".to_sym
           param_group_resource = resource_class.model_name.singular.to_sym
@@ -30,14 +29,13 @@ module Aepic
             yield
           else
             def_param_group(param_group_id) do
-              param :id, Integer, "ID of #{human_name}"
+              param :id, Integer, "ID of #{human_name}", required: true
             end
             columns = resource_class.columns_hash
             def_param_group(param_group_resource) do
               param param_group_resource, Hash, action_aware: true do
                 columns.each do |name, column|
-                  param name.to_sym, column.sql_type.classify.safe_constantize || String, required: !column.null unless name == 'id'
-                  # STDERR.puts "params :#{name}, #{column.sql_type.classify.safe_constantize || String}"
+                  param name.to_sym, column.sql_type.classify.safe_constantize || String, required: !column.null, desc: klass.human_attribute_name(name) unless name == 'id'
                 end
               end
             end

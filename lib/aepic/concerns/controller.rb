@@ -18,9 +18,15 @@ module Aepic
         respond_to :json
         respond_to :jsonld, only: :index
 
-        has_scope :ids, only: :index do |controller, scope, ids|
+        has_scope :ids, only: :index do |_controller, scope, ids|
           ids = ids.to_s.split(',').map { |id| id.to_i }
           scope.where(id: ids)
+        end
+        has_scope :sort, only: :index do |_controller, scope, fields|
+          ordering = fields.to_s.split(',').map do |field|
+            field.start_with?('-') ? "#{field} ASC" : "#{field[1..-1]} DESC"
+          end.join(', ')
+          scope.order(ordering)
         end
 
         has_scope :page, only: :index, default: '1'

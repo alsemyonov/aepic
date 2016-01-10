@@ -41,8 +41,8 @@ module Aepic
       #  self.class._root
       #end
 
-      def attributes
-        {'@context' => jsonld_context}.merge(super)
+      def attributes(options = {})
+        {'@context' => jsonld_context}.merge(super(options))
       end
 
       def jsonld_context
