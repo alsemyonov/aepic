@@ -19,8 +19,12 @@ module Aepic
         respond_to :jsonld, only: :index
 
         has_scope :ids, only: :index do |_controller, scope, ids|
-          ids = ids.to_s.split(',').map { |id| id.to_i }
-          scope.where(id: ids)
+          if ids.present?
+            ids = ids.to_s.split(',').map { |id| id.to_i }
+            scope.where(id: ids)
+          else
+            scope
+          end
         end
         has_scope :sort, only: :index do |_controller, scope, fields|
           ordering = fields.to_s.split(',').map do |field|
@@ -31,6 +35,9 @@ module Aepic
 
         has_scope :page, only: :index, default: '1'
         has_scope :per, only: :index
+        has_scope :per_page, only: :index do |controller, scope, value|
+          value ? scope.per(value) : scope
+        end
         helper_method :resource_serializer
 
         include Overrides

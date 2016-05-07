@@ -6,6 +6,8 @@ module Aepic
     module Serializer
       extend ActiveSupport::Concern
 
+      autoload :Adapter, 'aepic/concerns/serializer/adapter'
+
       XSD_TYPES = Hash.new do |hash, key|
         hash[key] = "xsd:#{key}"
       end.merge({
