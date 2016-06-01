@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = %w(lib)
 
   spec.add_runtime_dependency 'actionpack', '>= 4.2.5.2'
-  spec.add_runtime_dependency 'active_model_serializers', '~> 0.10.0.rc5'
+  spec.add_runtime_dependency 'active_model_serializers', '~> 0.10.0'
   spec.add_runtime_dependency 'inherited_resources', '~> 1.6.0'
   spec.add_runtime_dependency 'has_scope', '~> 0.6.0'
   spec.add_runtime_dependency 'responders', '~> 2.1.2'
