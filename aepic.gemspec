@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'responders', '~> 2.1.2'
   spec.add_runtime_dependency 'draper', '~> 2.1.0'
   spec.add_runtime_dependency 'kaminari', '~> 0.16.3'
-  spec.add_runtime_dependency 'nokogiri', '~> 1.6.7.1'
+  spec.add_runtime_dependency 'nokogiri', '~> 1.6.8'
 
   spec.add_development_dependency 'bundler', '~> 1.3'
   spec.add_development_dependency 'rake'
