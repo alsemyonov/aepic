@@ -18,13 +18,13 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = %w(lib)
 
-  spec.add_runtime_dependency 'actionpack', '>= 4.2.5.2'
-  spec.add_runtime_dependency 'active_model_serializers', '~> 0.10.0'
-  spec.add_runtime_dependency 'inherited_resources', '~> 1.6.0'
-  spec.add_runtime_dependency 'has_scope', '~> 0.6.0'
-  spec.add_runtime_dependency 'responders', '~> 2.1.2'
-  spec.add_runtime_dependency 'draper', '~> 2.1.0'
-  spec.add_runtime_dependency 'kaminari', '~> 0.16.3'
+  spec.add_runtime_dependency 'actionpack', '>= 4'
+  spec.add_runtime_dependency 'active_model_serializers', '~> 0.10.2'
+  spec.add_runtime_dependency 'inherited_resources'
+  spec.add_runtime_dependency 'has_scope', '~> 0.7.0'
+  spec.add_runtime_dependency 'responders', '~> 2.2.0'
+  spec.add_runtime_dependency 'draper', '~> 3.0.0.pre1'
+  spec.add_runtime_dependency 'kaminari', '~> 0.17.0'
   spec.add_runtime_dependency 'nokogiri', '~> 1.6.8'
 
   spec.add_development_dependency 'bundler', '~> 1.3'
